@@ -1,23 +1,40 @@
-import UAParser from 'ua-parser-js';
-
 const transparentPixel = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAn0B9Lq8VfsAAAAASUVORK5CYII=',
   'base64'
 );
 
+function parseUserAgent(ua) {
+  let browser = 'Unknown', os = 'Unknown', device = 'desktop';
+
+  if (/mobile/i.test(ua)) device = 'mobile';
+  else if (/tablet/i.test(ua)) device = 'tablet';
+
+  if (/chrome|crios/i.test(ua)) browser = 'Chrome';
+  else if (/safari/i.test(ua)) browser = 'Safari';
+  else if (/firefox/i.test(ua)) browser = 'Firefox';
+  else if (/edg/i.test(ua)) browser = 'Edge';
+  else if (/msie|trident/i.test(ua)) browser = 'Internet Explorer';
+
+  if (/windows/i.test(ua)) os = 'Windows';
+  else if (/macintosh|mac os/i.test(ua)) os = 'Mac OS';
+  else if (/android/i.test(ua)) os = 'Android';
+  else if (/iphone|ipad/i.test(ua)) os = 'iOS';
+  else if (/linux/i.test(ua)) os = 'Linux';
+
+  return { browser, os, device };
+}
+
 export default async function handler(req, res) {
   const { email } = req.query;
   const userAgent = req.headers['user-agent'] || 'unknown';
-
-  const parser = new UAParser(userAgent);
-  const ua = parser.getResult();
+  const parsed = parseUserAgent(userAgent);
 
   const logData = {
     timestamp: new Date().toISOString(),
     email: email || 'unknown',
-    browser: `${ua.browser.name} ${ua.browser.version}`,
-    os: `${ua.os.name} ${ua.os.version}`,
-    device: ua.device.type || 'desktop',
+    browser: parsed.browser,
+    os: parsed.os,
+    device: parsed.device,
     rawUserAgent: userAgent,
   };
 
@@ -28,7 +45,7 @@ export default async function handler(req, res) {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (err) {
-    console.error('OpenLog POST failed:', err);
+    console.error('Failed to log open:', err);
   }
 
   res.setHeader('Content-Type', 'image/png');
