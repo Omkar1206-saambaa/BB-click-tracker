@@ -39,7 +39,7 @@ export default async function handler(req, res) {
   };
 
   try {
-    await fetch('https://script.google.com/macros/s/AKfycbyEKCRm4ugimilZJoxrq95TZrfEhG7rMwR2mee_6Vf_2BkB2Wqbbi3pYDMDVgXmc1zQ/exec', {
+    await fetch('https://script.google.com/macros/s/AKfycbyKFJdfv73BFABLlnRQTUFUEGeA97MIJFwxcneX9C2v-TdhkNXif_DHD68Qv1rFpKkF/exec', {
       method: 'POST',
       body: JSON.stringify(logData),
       headers: { 'Content-Type': 'application/json' },
