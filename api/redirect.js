@@ -17,9 +17,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    await fetch(`https://script.google.com/macros/s/AKfycbxO9EmqSLwyBW-9o5Ucl87afvBPYXFh6PNyV7XKW-OUvwzOdu8KVapuBLr8oZweOZGQ/exec?link=${link}&user=${encodeURIComponent(user)}&campaign=${encodeURIComponent(campaign || "General")}`);
+    const logUrl = `https://script.google.com/macros/s/AKfycbxO9EmqSLwyBW-9o5Ucl87afvBPYXFh6PNyV7XKW-OUvwzOdu8KVapuBLr8oZweOZGQ/exec?link=${link}&user=${encodeURIComponent(user)}&campaign=${encodeURIComponent(campaign || "General")}`;
+
+    const response = await fetch(logUrl);
+    const text = await response.text();
+
+    console.log("📬 Log URL:", logUrl);
+    console.log("📬 Response status:", response.status);
+    console.log("📬 Response text:", text);
   } catch (err) {
-    console.error("Logging error:", err);
+    console.error("❌ Logging error:", err);
   }
 
   res.writeHead(302, { Location: destination });
