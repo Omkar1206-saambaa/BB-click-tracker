@@ -2,15 +2,12 @@ export default async function handler(req, res) {
   const { link, user, campaign } = req.query;
 
   const DESTINATIONS = {
-    youtube1: "https://www.youtube.com/watch?v=6YpDlx7ofHI&t=20s",
-    article2link: "https://www.webmd.com/diet/health-benefits-chia-seeds",
-    article1podcastlink: "https://wondery.com/shows/how-i-built-this/episode/10386-minted-mariam-naficy-2018/",
-    article1link: "https://www.vcuhealth.org/news/one-small-step-the-mental-health-benefits-of-walking-outside/",
-    lucidmotorsad: "https://lucidmotors.com/",
-    loyalityprogram: "https://bareblends.com/loyalty-program",
-    athletaad: "https://athleta.gap.com/",
-    orderlink: "https://order.incentivio.com/c/bareblends",
-    websitelink: "https://bareblends.com"
+    youtube1: "https://www.youtube.com/watch?v=6YpDlx7ofHI",
+    article2link: "https://www.drweil.com/health-wellness/balanced-living/exercise-fitness/yoga-more-than-a-workout/",
+    article1link: "https://blog.themindfulnessapp.com/articles/building-a-mindful-morning-routine",
+    lexusad: "https://www.lexus.com/",
+    ritzad: "https://www.ritzcarlton.com/",
+    websitelink: "https://www.drybar.com/"
   };
 
   const destination = DESTINATIONS[link];
@@ -20,7 +17,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    await fetch(`https://script.google.com/macros/s/AKfycbxWVJ4xcVUz8sJgcpRR_-2b-KjNeJg0zNjV1quoPrS-T9iMPHXYQevpX_URpYdLMDUd/exec?link=${link}&user=${encodeURIComponent(user)}&campaign=${encodeURIComponent(campaign || "General")}`);
+    await fetch(`https://script.google.com/macros/s/AKfycbxb3kETVRDrozcxHaIJ98e7IxJuF2qeaROuoQHgc8Q/exec?link=${link}&user=${encodeURIComponent(user)}&campaign=${encodeURIComponent(campaign || "General")}`);
   } catch (err) {
     console.error("Logging error:", err);
   }
