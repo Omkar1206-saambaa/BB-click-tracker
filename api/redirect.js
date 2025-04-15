@@ -17,7 +17,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const logUrl = `https://script.google.com/macros/s/AKfycbyKFJdfv73BFABLlnRQTUFUEGeA97MIJFwxcneX9C2v-TdhkNXif_DHD68Qv1rFpKkF/exec?link=${link}&user=${encodeURIComponent(user)}&campaign=${encodeURIComponent(campaign || "General")}`;
+    const logUrl = `https://script.google.com/macros/s/AKfycbwd6rCe3qis3m4_qklPsWrbCdd94TOnnUjFHVjwzbT_EGpapdKfGuAm67YdcM8xf8Dk/exec?link=${link}&user=${encodeURIComponent(user)}&campaign=${encodeURIComponent(campaign || "General")}`;
 
     const response = await fetch(logUrl);
     const text = await response.text();
