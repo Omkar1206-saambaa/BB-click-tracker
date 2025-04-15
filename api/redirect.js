@@ -17,7 +17,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    await fetch(`https://script.google.com/macros/s/AKfycbxb3kETVRDrozcxHaIJ98e7IxJuF2qeaROuoQHgc8Q/exec?link=${link}&user=${encodeURIComponent(user)}&campaign=${encodeURIComponent(campaign || "General")}`);
+    await fetch(`https://script.google.com/macros/s/AKfycbx2Sf0qL4aFq4stXfoVEXN5H_jIt9D1yrhYc83w8wGhq821pMsLcDsORy4C3O_o_FZn/exec?link=${link}&user=${encodeURIComponent(user)}&campaign=${encodeURIComponent(campaign || "General")}`);
   } catch (err) {
     console.error("Logging error:", err);
   }
